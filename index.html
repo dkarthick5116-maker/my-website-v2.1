@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101827">
+  <title>My Website | Student & Teacher Portal</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">MW</span><div><b>My Website</b><small>Learning Portal</small></div></div>
+    <div class="language">
+      <button id="englishBtn" class="active">English</button>
+      <button id="tamilBtn">தமிழ்</button>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="intro">
+      <span class="eyebrow" data-en="WELCOME TO YOUR LEARNING SPACE" data-ta="உங்கள் கற்றல் தளத்திற்கு வரவேற்கிறோம்">WELCOME TO YOUR LEARNING SPACE</span>
+      <h1 data-en="Learn, practise and grow." data-ta="கற்றுக்கொள்ளுங்கள், பயிற்சி செய்யுங்கள், முன்னேறுங்கள்.">Learn, practise and grow.</h1>
+      <p data-en="A shared learning portal for Tamil Nadu State Board and CBSE students and teachers." data-ta="தமிழ்நாடு மாநிலப் பாடத்திட்டம் மற்றும் CBSE மாணவர்கள், ஆசிரியர்களுக்கான கற்றல் தளம்.">A shared learning portal for Tamil Nadu State Board and CBSE students and teachers.</p>
+    </section>
+
+    <section class="portal-grid">
+      <article class="panel">
+        <div class="panel-heading"><div class="icon student-icon">🎓</div><div><h2 data-en="Student Portal" data-ta="மாணவர் பகுதி">Student Portal</h2><p data-en="Use your roll number to sign in." data-ta="உங்கள் பதிவெண்ணைப் பயன்படுத்தி உள்நுழையுங்கள்.">Use your roll number to sign in.</p></div></div>
+        <div class="tabs"><button class="tab active" data-tab="student-login" data-en="Login" data-ta="உள்நுழை">Login</button><button class="tab" data-tab="student-signup" data-en="Create account" data-ta="கணக்கு உருவாக்கு">Create account</button></div>
+        <form id="student-login" class="auth-form">
+          <label data-en="Roll number" data-ta="பதிவெண்">Roll number</label><input name="roll" required autocomplete="username" placeholder="Enter roll number">
+          <label data-en="School name" data-ta="பள்ளியின் பெயர்">School name</label><input name="school" required placeholder="Enter your school name">
+          <label data-en="Password" data-ta="கடவுச்சொல்">Password</label><input name="password" type="password" required autocomplete="current-password" placeholder="Enter password">
+          <button class="primary" type="submit" data-en="Student login" data-ta="மாணவர் உள்நுழைவு">Student login</button>
+        </form>
+        <form id="student-signup" class="auth-form hidden">
+          <label>Full name / முழுப் பெயர்</label><input name="name" required>
+          <label>Roll number / பதிவெண்</label><input name="roll" required>
+          <label>Class / வகுப்பு</label><select name="class_name" required><option value="">Select class</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select>
+          <label>School name / பள்ளியின் பெயர்</label><input name="school" required>
+          <label>Curriculum / பாடத்திட்டம்</label><select name="curriculum" required><option value="">Select curriculum</option><option>Tamil Nadu State Board</option><option>CBSE</option></select>
+          <label>Parent/guardian email (optional) / பெற்றோர் மின்னஞ்சல் (விருப்பம்)</label><input name="parent_email" type="email">
+          <label>Password / கடவுச்சொல்</label><input name="password" type="password" minlength="8" required autocomplete="new-password">
+          <button class="primary" type="submit">Create student account / கணக்கு உருவாக்கு</button>
+        </form>
+      </article>
+
+      <article class="panel">
+        <div class="panel-heading"><div class="icon teacher-icon">👩‍🏫</div><div><h2 data-en="Teacher Portal" data-ta="ஆசிரியர் பகுதி">Teacher Portal</h2><p data-en="Sign in with your email and school name." data-ta="மின்னஞ்சல் மற்றும் பள்ளியின் பெயருடன் உள்நுழையுங்கள்.">Sign in with your email and school name.</p></div></div>
+        <div class="tabs"><button class="tab active" data-tab="teacher-login" data-en="Login" data-ta="உள்நுழை">Login</button><button class="tab" data-tab="teacher-signup" data-en="Create account" data-ta="கணக்கு உருவாக்கு">Create account</button></div>
+        <form id="teacher-login" class="auth-form">
+          <label>Email address / மின்னஞ்சல்</label><input name="email" type="email" required autocomplete="username">
+          <label>School name / பள்ளியின் பெயர்</label><input name="school" required>
+          <label>Password / கடவுச்சொல்</label><input name="password" type="password" required autocomplete="current-password">
+          <button class="primary" type="submit">Teacher login / ஆசிரியர் உள்நுழைவு</button>
+        </form>
+        <form id="teacher-signup" class="auth-form hidden">
+          <label>Full name / முழுப் பெயர்</label><input name="name" required>
+          <label>Email address / மின்னஞ்சல்</label><input name="email" type="email" required>
+          <label>School name / பள்ளியின் பெயர்</label><input name="school" required>
+          <label>Curriculum / பாடத்திட்டம்</label><select name="curriculum" required><option value="">Select curriculum</option><option>Tamil Nadu State Board</option><option>CBSE</option><option>Both</option></select>
+          <label>Subjects (optional) / பாடங்கள்</label><input name="subjects" placeholder="e.g. Mathematics, Science">
+          <label>Password / கடவுச்சொல்</label><input name="password" type="password" minlength="8" required autocomplete="new-password">
+          <button class="primary" type="submit">Create teacher account / கணக்கு உருவாக்கு</button>
+          <p class="hint">A verification link will be sent to your email. Verify it before logging in.</p>
+        </form>
+      </article>
+    </section>
+
+    <section id="message" class="message hidden" role="status" aria-live="polite"></section>
+    <section id="dashboard" class="panel dashboard hidden">
+      <div class="dashboard-top"><div><span class="eyebrow">ACCOUNT</span><h2 id="welcomeTitle">Welcome</h2><p id="profileSummary"></p></div><button id="logoutBtn" class="secondary">Log out</button></div>
+      <div class="dashboard-links"><div>📚 <b>Learning library</b><small>Study resources and subjects</small></div><div>📝 <b>Practice tests</b><small>Questions and self-practice</small></div><div>🌐 <b>Language</b><small>Tamil and English</small></div></div>
+      <p class="hint">This starter dashboard is a front-end foundation. Add learning content and school-authorized features before public launch.</p>
+    </section>
+    <footer>© My Website · Tamil Nadu State Board + CBSE · English & தமிழ்</footer>
+  </main>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
